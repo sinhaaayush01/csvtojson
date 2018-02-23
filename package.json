@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint GDP20.js",
-    "generate": "GDP20.js",
+    "generate": "node GDP20.js",
     "start": "http-server"
   },
   "repository": {
