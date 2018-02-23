@@ -3,7 +3,7 @@ const fs = require('fs');
 const readline = require('readline');
 const Stream = require('stream');
 // For reading the csv file
-const instream = fs.createReadStream('../country_details.csv');
+const instream = fs.createReadStream('country_details.csv');
 // Creating stream for saving into object after reading
 const outsream = new Stream();
 const rl = readline.createInterface(instream, outsream);
@@ -85,7 +85,7 @@ rl.on('close', () => {
 let rawdata = fs.readFileSync('gdp.json');
 let pop = JSON.parse(rawdata); */
 function cgdp() {
-    const pop = require('./gdp.json');
+    const pop = require('../gdp.json');
     // console.log(pop);
     // console.log(pop[0].Country);
     // console.log(pop.length);
@@ -158,7 +158,7 @@ function cgdp() {
 
 function cpopulation() {
     const fs = require('fs');
-    const pop = require('./population.json');
+    const pop = require('../population.json');
     // let rawdata = fs.readFileSync('population.json');
     /* const fs = require('fs');
     let pop = JSON.parse(rawdata);

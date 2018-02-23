@@ -29,7 +29,7 @@ var svg3 = d3.select(".sec2").append("svg")
 
 
 // load the data
-d3.json("script/gdp.json", function(error, data) {
+d3.json("gdp.json", function(error, data) {
 
     data.forEach(function(d) {
         d.Country = d.Country;
@@ -49,7 +49,7 @@ d3.json("script/gdp.json", function(error, data) {
       .style("text-anchor", "end")
       .attr("dx", "-.8em")
       .attr("dy", "-.55em")
-      .attr("transform", "rotate(-40)");
+      .attr("transform", "rotate(-80)");
 
   svg3.append("g")
       .attr("class", "y axis")

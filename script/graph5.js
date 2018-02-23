@@ -29,7 +29,7 @@ var svg5 = d3.select(".sec5").append("svg")
 
 
 // load the data
-d3.json("script/continentgdp.json", function(error, data) {
+d3.json("continentgdp.json", function(error, data) {
 
     data.forEach(function(d) {
         d.Continent = d.Continent;
