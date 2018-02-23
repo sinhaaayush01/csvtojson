@@ -1,14 +1,15 @@
-// For adding the modules of node js
+// For adding the modules of node js // FIXME: Comment is too obvious.
 const fs = require('fs');
 const readline = require('readline');
 const Stream = require('stream');
-// For reading the csv file
+
+// For reading the csv file // FIXME: Too Obvious
 const instream = fs.createReadStream('../country_details.csv');
 // Creating stream for saving into object after reading
 const outsream = new Stream();
 const rl = readline.createInterface(instream, outsream);
-let counter = 0;
-let i; // Counter
+let counter = 0; // FIXME: RENAME TO isHeader
+let i; // Counter // FIXME: Move to local scope
 const population = [];
 const gdp = [];
 const ppp = [];
@@ -29,6 +30,8 @@ rl.on('line', (line) => {
             const gdpobject = {};
             const pppobject = {};
             for (i = 0; i < headers.length; i += 1) {
+                // FIXME: All lines in this block, can be reduced to 4- lines of code. Use Switch/Case
+
                 if (headers[i] === 'Country') {
                     populationobject[headers[i]] = values[i];
                     gdpobject[headers[i]] = values[i];
@@ -55,6 +58,8 @@ rl.on('line', (line) => {
 
         // console.log(temp['Country']);
     }
+
+    // FIXME: Sorting at every line is bad. Either use Tree Set, or move sorting to 'close' event.
     population.sort((c, b) => b.Population2013 - c.Population2013);
     gdp.sort((c, b) => b.GDP2013 - c.GDP2013);
     ppp.sort((c, b) => b.PPP2013 - c.PPP2013);
@@ -75,9 +80,18 @@ rl.on('close', () => {
 });
 
 function cgdp() {
-    const pop = require('./gdp.json');
+    const pop = require('./gdp.json'); // FIXME: remove this require, and get the data as argument
     const continent = [];
     let values = {};
+
+    const continentData = {
+        as: 0,
+        s: 0,
+        e: 0,
+        n: 0,
+        a: 0
+    };
+
     let as = 0;
     let s = 0;
     let e = 0;
@@ -85,7 +99,7 @@ function cgdp() {
     let a = 0;
     let af = 0;
     let i;
-    for (i = 0; i < pop.length; i += 1) {
+    for (i = 0; i < pop.length; i += 1) { // FIXME: Refactor the conditions in this block. Store countries inside an array.
         if (pop[i].Country === 'Russia' || pop[i].Country === 'India' || pop[i].Country === 'Japan' || pop[i].Country === 'China' || pop[i].Country === 'Indonesia' || pop[i].Country === 'Saudi Arabia' || pop[i].Country === 'Turkey' || pop[i].Country === 'Republic of Korea') {
             as += parseFloat(pop[i].GDP2013);
         } else if (pop[i].Country === 'France' || pop[i].Country === 'Italy' || pop[i].Country === 'Germany' || pop[i].Country === 'United Kingdom') {
