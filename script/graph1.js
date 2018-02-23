@@ -29,7 +29,7 @@ var svg1 = d3.select(".sec1").append("svg")
 
 
 // load the data
-d3.json("population.json", function(error, data) {
+d3.json("script/population.json", function(error, data) {
 
     data.forEach(function(d) {
         d.Country = d.Country;

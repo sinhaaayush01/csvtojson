@@ -3,7 +3,7 @@ const fs = require('fs');
 const readline = require('readline');
 const Stream = require('stream');
 // For reading the csv file
-const instream = fs.createReadStream('country_details.csv');
+const instream = fs.createReadStream('../country_details.csv');
 // Creating stream for saving into object after reading
 const outsream = new Stream();
 const rl = readline.createInterface(instream, outsream);
@@ -21,38 +21,38 @@ rl.on('line', (line) => {
         headers = line.split(',');
         a = 1;
     } else {
-        const currentline = line.split(',');
-        // console.log(currentline[5]);
-        // console.log(currentline.indexOf('European Union')==-1);
-        if (currentline.indexOf('European Union') === -1 && currentline.indexOf('World') === -1) {
-            const temp = {};
-            const temp1 = {};
-            const temp2 = {};
-            /* temp['Country'] = currentline[0];
-                            temp1['Country'] = currentline[0];
-                            temp2['Country'] = currentline[0]; */
+        const values = line.split(',');
+        // console.log(values[5]);
+        // console.log(values.indexOf('European Union')==-1);
+        if (values.indexOf('European Union') === -1 && values.indexOf('World') === -1) {
+            const populationobject = {};
+            const gdpobject = {};
+            const pppobject = {};
+            /* temp['Country'] = values[0];
+                            gdpobject['Country'] = values[0];
+                            pppobject['Country'] = values[0]; */
             for (i = 0; i < headers.length; i += 1) {
                 if (headers[i] === 'Country') {
-                    temp[headers[i]] = currentline[i];
-                    temp1[headers[i]] = currentline[i];
-                    temp2[headers[i]] = currentline[i];
+                    populationobject[headers[i]] = values[i];
+                    gdpobject[headers[i]] = values[i];
+                    pppobject[headers[i]] = values[i];
                 }
                 if (headers[i] === 'Population2013') {
-                    // temp[headers[i]] = currentline[i];
-                    temp[headers[i]] = currentline[i];
+                    // temp[headers[i]] = values[i];
+                    populationobject[headers[i]] = values[i];
                 }
 
                 if (headers[i] === 'GDP2013') {
-                    temp1[headers[i]] = currentline[i];
+                    gdpobject[headers[i]] = values[i];
                 }
                 if (headers[i] === 'PPP2013') {
-                    temp2[headers[i]] = currentline[i];
+                    pppobject[headers[i]] = values[i];
                 }
             }
 
-            population.push(temp);
-            gdp.push(temp1);
-            ppp.push(temp2);
+            population.push(populationobject);
+            gdp.push(gdpobject);
+            ppp.push(pppobject);
         }
 
 
@@ -85,12 +85,12 @@ rl.on('close', () => {
 let rawdata = fs.readFileSync('gdp.json');
 let pop = JSON.parse(rawdata); */
 function cgdp() {
-    const pop = require('../gdp.json');
+    const pop = require('./gdp.json');
     // console.log(pop);
     // console.log(pop[0].Country);
     // console.log(pop.length);
-    const cont = [];
-    let temp = {};
+    const continent = [];
+    let values = {};
     let as = 0;
     let s = 0;
     let e = 0;
@@ -102,13 +102,13 @@ function cgdp() {
         if (pop[i].Country === 'Russia' || pop[i].Country === 'India' || pop[i].Country === 'Japan' || pop[i].Country === 'China' || pop[i].Country === 'Indonesia' || pop[i].Country === 'Saudi Arabia' || pop[i].Country === 'Turkey' || pop[i].Country === 'Republic of Korea') {
             as += parseFloat(pop[i].GDP2013);
         } else if (pop[i].Country === 'France' || pop[i].Country === 'Italy' || pop[i].Country === 'Germany' || pop[i].Country === 'United Kingdom') {
-            temp.Continent = 'Europe';
+            values.Continent = 'Europe';
             e += parseFloat(pop[i].GDP2013);
         } else if (pop[i].Country === 'Australia') {
-            // temp3["Country"]="Austrailia";
+            // Values3["Country"]="Austrailia";
             a = parseFloat(pop[i].GDP2013);
         } else if (pop[i].Country === 'Mexico' || pop[i].Country === 'USA' || pop[i].Country === 'Canada') {
-            // temp3["Country"]="North America";
+            // Values3["Country"]="North America";
             n += parseFloat(pop[i].GDP2013);
         } else if (pop[i].Country === 'Brazil' || pop[i].Country === 'Argentina') {
             s += parseFloat(pop[i].GDP2013);
@@ -117,38 +117,38 @@ function cgdp() {
         }
     }
     // console.log(as);
-    temp.Continent = 'Asia';
-    temp.GDP2013 = as;
-    cont.push(temp);
+    values.Continent = 'Asia';
+    values.GDP2013 = as;
+    continent.push(values);
     // console.log(cont);
-    temp = {};
-    temp.Continent = 'North America';
-    temp.GDP2013 = n;
-    cont.push(temp);
+    values = {};
+    values.Continent = 'North America';
+    values.GDP2013 = n;
+    continent.push(values);
     // console.log(cont)
-    temp = {};
-    temp.Continent = 'Europe';
-    temp.GDP2013 = e;
-    cont.push(temp);
+    values = {};
+    values.Continent = 'Europe';
+    values.GDP2013 = e;
+    continent.push(values);
     // console.log(cont);
-    temp = {};
-    temp.Continent = 'South America';
-    temp.GDP2013 = s;
-    cont.push(temp);
+    values = {};
+    values.Continent = 'South America';
+    values.GDP2013 = s;
+    continent.push(values);
     // console.log(cont);
-    temp = {};
-    temp.Continent = 'Australia';
-    temp.GDP2013 = a;
+    values = {};
+    values.Continent = 'Australia';
+    values.GDP2013 = a;
     // console.log(cont);
-    cont.push(temp);
+    continent.push(values);
     // console.log(cont);
-    temp = {};
-    temp.Continent = 'Africa';
-    temp.GDP2013 = af;
-    cont.push(temp);
-    // console.log(temp);
+    values = {};
+    values.Continent = 'Africa';
+    values.GDP2013 = af;
+    continent.push(values);
+    // console.log(values);
     // console.log(cont);
-    const data = JSON.stringify(cont);
+    const data = JSON.stringify(continent);
     const fs = require('fs');
 
     fs.writeFile('continentgdp.json', data, (err) => {
@@ -158,15 +158,15 @@ function cgdp() {
 
 function cpopulation() {
     const fs = require('fs');
-    const pop = require('../population.json');
+    const pop = require('./population.json');
     // let rawdata = fs.readFileSync('population.json');
     /* const fs = require('fs');
     let pop = JSON.parse(rawdata);
     //console.log(pop);
     //console.log(pop[0].Country);
     //console.log(pop.length); */
-    const cont = [];
-    let temp = {};
+    const Continent = [];
+    let values = {};
     let as = 0;
     let s = 0;
     let e = 0;
@@ -178,13 +178,13 @@ function cpopulation() {
         if (pop[i].Country === 'Russia' || pop[i].Country === 'India' || pop[i].Country === 'Japan' || pop[i].Country === 'China' || pop[i].Country === 'Indonesia' || pop[i].Country === 'Saudi Arabia' || pop[i].Country === 'Turkey' || pop[i].Country === 'Republic of Korea') {
             as += parseFloat(pop[i].Population2013);
         } else if (pop[i].Country === 'France' || pop[i].Country === 'Italy' || pop[i].Country === 'Germany' || pop[i].Country === 'United Kingdom') {
-            temp.Continent = 'Europe';
+            values.Continent = 'Europe';
             e += parseFloat(pop[i].Population2013);
         } else if (pop[i].Country === 'Australia') {
-            // temp3["Country"]="Austrailia";
+            // values3["Country"]="Austrailia";
             a = parseFloat(pop[i].Population2013);
         } else if (pop[i].Country === 'Mexico' || pop[i].Country === 'USA' || pop[i].Country === 'Canada') {
-            // temp3["Country"]="North America";
+            // values3["Country"]="North America";
             n += parseFloat(pop[i].Population2013);
         } else if (pop[i].Country === 'Brazil' || pop[i].Country === 'Argentina') {
             s += parseFloat(pop[i].Population2013);
@@ -193,37 +193,37 @@ function cpopulation() {
         }
     }
     // console.log(as);
-    temp.Continent = 'Asia';
-    temp.Population2013 = as;
-    cont.push(temp);
-    // console.log(cont);
-    temp = {};
-    temp.Continent = 'North America';
-    temp.Population2013 = n;
-    cont.push(temp);
-    // console.log(cont)
-    temp = {};
-    temp.Continent = 'Europe';
-    temp.Population2013 = e;
-    cont.push(temp);
-    // console.log(cont);
-    temp = {};
-    temp.Continent = 'South America';
-    temp.Population2013 = s;
-    cont.push(temp);
-    // console.log(cont);
-    temp = {};
-    temp.Continent = 'Africa';
-    temp.Population2013 = af;
-    cont.push(temp);
-    // console.log(temp);
-    temp = {};
-    temp.Continent = 'Australia';
-    temp.Population2013 = a;
-    // console.log(cont);
-    cont.push(temp);
-    // console.log(cont);
-    const data = JSON.stringify(cont);
+    values.Continent = 'Asia';
+    values.Population2013 = as;
+    Continent.push(values);
+    // console.log(Continent);
+    values = {};
+    values.Continent = 'North America';
+    values.Population2013 = n;
+    Continent.push(values);
+    // console.log(Continent)
+    values = {};
+    values.Continent = 'Europe';
+    values.Population2013 = e;
+    Continent.push(values);
+    // console.log(Continent);
+    values = {};
+    values.Continent = 'South America';
+    values.Population2013 = s;
+    Continent.push(values);
+    // console.log(Continent);
+    values = {};
+    values.Continent = 'Africa';
+    values.Population2013 = af;
+    Continent.push(values);
+    // console.log(values);
+    values = {};
+    values.Continent = 'Australia';
+    values.Population2013 = a;
+    // console.log(Continent);
+    Continent.push(values);
+    // console.log(Continent);
+    const data = JSON.stringify(Continent);
     fs.writeFile('continentpopulation.json', data, (err) => {
         if (err) { console.log(err); }
     });
