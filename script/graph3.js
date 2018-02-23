@@ -49,7 +49,7 @@ d3.json("script/ppp.json", function(error, data) {
       .style("text-anchor", "end")
       .attr("dx", "-.8em")
       .attr("dy", "-.55em")
-      .attr("transform", "rotate(-80)");
+      .attr("transform", "rotate(-90)");
 
   svg2.append("g")
         .attr("class", "y axis")
