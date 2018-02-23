@@ -1,0 +1,27 @@
+{
+  "name": "csvtojson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinhaaayush01/csvtojson.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinhaaayush01/csvtojson/issues"
+  },
+  "homepage": "https://github.com/sinhaaayush01/csvtojson#readme",
+  "dependencies": {
+    "eslint": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0"
+  }
+}
