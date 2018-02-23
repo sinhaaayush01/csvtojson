@@ -7,7 +7,7 @@ const instream = fs.createReadStream('../country_details.csv');
 // Creating stream for saving into object after reading
 const outsream = new Stream();
 const rl = readline.createInterface(instream, outsream);
-let a = 0;
+let counter = 0;
 let i; // Counter
 const population = [];
 const gdp = [];
@@ -17,9 +17,9 @@ const ppp = [];
 
 let headers = []; // Array for header
 rl.on('line', (line) => {
-    if (a === 0) {
+    if (counter === 0) {
         headers = line.split(',');
-        a = 1;
+        counter = 1;
     } else {
         const values = line.split(',');
         // console.log(values[5]);
@@ -28,9 +28,6 @@ rl.on('line', (line) => {
             const populationobject = {};
             const gdpobject = {};
             const pppobject = {};
-            /* temp['Country'] = values[0];
-                            gdpobject['Country'] = values[0];
-                            pppobject['Country'] = values[0]; */
             for (i = 0; i < headers.length; i += 1) {
                 if (headers[i] === 'Country') {
                     populationobject[headers[i]] = values[i];
@@ -75,20 +72,10 @@ rl.on('close', () => {
     fs.writeFile('ppp.json', JSON.stringify(ppp), 'utf8', (err) => {
         if (err) { console.log('error'); }
     });
-    /* fs.writeFile('continent.json', JSON.stringify(ppp), 'utf8', function(err) {
-            console.log(err);
-        }); */
-    //cont();
 });
 
-/* const fs = require('fs');
-let rawdata = fs.readFileSync('gdp.json');
-let pop = JSON.parse(rawdata); */
 function cgdp() {
     const pop = require('./gdp.json');
-    // console.log(pop);
-    // console.log(pop[0].Country);
-    // console.log(pop.length);
     const continent = [];
     let values = {};
     let as = 0;
