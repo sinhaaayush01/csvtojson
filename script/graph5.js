@@ -41,35 +41,36 @@ d3.json("script/continentgdp.json", function(error, data) {
   y.domain([0, d3.max(data, function(d) { return d.GDP2013; })]);
 
   // add axis
-  svg5.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis)
-    .selectAll("text")
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", "-.55em")
-      .attr("transform", "rotate(-80)");
+  svg5.append('g')
+   .attr('class', 'x axis')
+   .attr('transform', `translate(0,${height})`)
+   .call(xAxis)
+   .selectAll('text')
+   .style('text-anchor', 'end')
+   .attr('dx', '-.8em')
+   .attr('dy', '-.55em')
+   .attr('transform', 'rotate(-80)');
 
-  svg5.append("g")
-      .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -height/2)
-        .attr("dy", "-5em")
-        .style("text-anchor", "middle")
-        .text("GDP of Continents in 2013");
+ svg5.append('g')
+   .attr('class', 'y axis')
+   .call(yAxis)
+   .append('text')
+   .attr('transform', 'rotate(-90)')
+   .attr('x', -height / 2)
+   .attr('dy', '-4em')
+   .style('text-anchor', 'middle')
+   .text('GDP(Continent)');
 
 
-  // Add bar chart
-  svg5.selectAll("bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.Continent); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.GDP2013); })
-      .attr("height", function(d) { return height - y(d.GDP2013); });
-
+ // Add bar chart
+ svg5.selectAll('bar')
+   .data(data)
+   .enter().append('rect')
+   .attr('class', 'bar')
+ // .transition().duration(3000)
+   .attr('x', d => x(d.Continent))
+   .attr('width', x.rangeBand())
+   .attr('y', d => y(d.GDP2013))
+   .attr('height', d => height - y(d.GDP2013))
+   .style('fill', (d, i) => `rgb(20, 20, ${(i * 30) + 100})`);
 });
