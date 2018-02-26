@@ -4,7 +4,7 @@ const Stream = require('stream');
 const instream = fs.createReadStream('country_details.csv');
 const outsream = new Stream();
 const rl = readline.createInterface(instream, outsream);
-let isHeader = false; 
+let isHeader = false;
 const population = [];
 const gdp = [];
 const ppp = [];
@@ -48,16 +48,19 @@ rl.on('line', (line) => {
     ppp.sort((c, b) => b.PPP2013 - c.PPP2013);
 });
 rl.on('close', () => {
-    fs.writeFile('population.json', JSON.stringify(population), 'utf8', (err) => {cpopulation();
+    fs.writeFile('population.json', JSON.stringify(population), 'utf8', (err) => {
+        cpopulation();
         if (err) { console.log('error'); }
     });
-    fs.writeFile('gdp.json', JSON.stringify(gdp), 'utf8', (err) => {cgdp();
+    fs.writeFile('gdp.json', JSON.stringify(gdp), 'utf8', (err) => {
+        cgdp();
         if (err) { console.log('error'); }
     });
     fs.writeFile('ppp.json', JSON.stringify(ppp), 'utf8', (err) => {
         if (err) { console.log('error'); }
     });
 });
+
 function cgdp() {
     const pop = require('./gdp.json');
     const continent = [];
@@ -113,6 +116,7 @@ function cgdp() {
         if (err) { console.log('error'); }
     });
 }
+
 function cpopulation() {
     const pop = require('./population.json');
     const Continent = [];
